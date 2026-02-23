@@ -673,7 +673,7 @@ textarea.form-control { resize: vertical; min-height: 100px; }
   align-items: center;
   gap: 6px;
   font-size: 0.8125rem;
-  color: var(--text-muted);
+  color: #64748b
 }
 
 .app-actions {
@@ -681,7 +681,7 @@ textarea.form-control { resize: vertical; min-height: 100px; }
   gap: 8px;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #e2e8f0
 }
 
 /* ── Search & Filter Bar ─────────────────────────────────────────────── */

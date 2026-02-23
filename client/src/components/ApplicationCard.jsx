@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
+import { MapPin, Calendar, DollarSign, CheckCircle } from 'lucide-react'
 
 function ResultBadge({ result }) {
     const map = {
-        offer: { cls: 'badge-offer', text: 'Offer 🎉' },
+        offer: { cls: 'badge-offer', text: 'Offer' },
         rejected: { cls: 'badge-rejected', text: 'Rejected' },
         pending: { cls: 'badge-pending', text: 'Pending' },
     }
@@ -35,12 +36,26 @@ function ApplicationCard({ app, onDelete }) {
 
             <div className="app-meta">
                 {app.location && (
-                    <span className="app-meta-item">📍 {app.location}</span>
+                    <span className="app-meta-item">
+                        <MapPin size={16} />
+                        {app.location}
+                    </span>
                 )}
-                <span className="app-meta-item">📅 {formatDate(app.application_date)}</span>
-                {salary && <span className="app-meta-item">💰 {salary}</span>}
+                <span className="app-meta-item">
+                    <Calendar size={16} />
+                    {formatDate(app.application_date)}
+                </span>
+                {salary && (
+                    <span className="app-meta-item">
+                        <DollarSign size={16} />
+                        {salary}
+                    </span>
+                )}
                 {app.current_stage_name && (
-                    <span className="app-meta-item">🔵 {app.current_stage_name}</span>
+                    <span className="app-meta-item">
+                        <CheckCircle size={16} />
+                        {app.current_stage_name}
+                    </span>
                 )}
             </div>
 

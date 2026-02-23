@@ -13,13 +13,13 @@ createRoot(document.getElementById('root')).render(
         position="top-right"
         toastOptions={{
           style: {
-            background: '#1e1e35',
-            color: '#f1f5f9',
-            border: '1px solid rgba(99,102,241,0.3)',
-            borderRadius: '12px',
+            background: '#ffffff',
+            color: '#0f172a',
+            border: '1px solid #e2e8f0',
+            borderRadius: '8px',
           },
-          success: { iconTheme: { primary: '#10b981', secondary: '#fff' } },
-          error: { iconTheme: { primary: '#ef4444', secondary: '#fff' } },
+          success: { iconTheme: { primary: '#059669', secondary: '#fff' } },
+          error: { iconTheme: { primary: '#dc2626', secondary: '#fff' } },
         }}
       />
     </BrowserRouter>

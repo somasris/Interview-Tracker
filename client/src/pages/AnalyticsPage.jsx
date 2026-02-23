@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Briefcase, TrendingUp, XCircle, Clock } from 'lucide-react'
 import { dashboardAPI } from '../services/api.js'
 import MonthlyChart from '../components/MonthlyChart.jsx'
 import StatCard from '../components/StatCard.jsx'
@@ -8,7 +9,7 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid,
 } from 'recharts'
 
-const OUTCOME_COLORS = ['#8b5cf6', '#10b981', '#ef4444']
+const OUTCOME_COLORS = ['#d97706', '#059669', '#dc2626']
 
 function AnalyticsPage() {
     const [stats, setStats] = useState(null)
@@ -39,22 +40,22 @@ function AnalyticsPage() {
     return (
         <div>
             <div className="page-header">
-                <h1>📈 Analytics</h1>
+                <h1>Analytics</h1>
                 <p>Insights into your job search performance</p>
             </div>
 
             {/* Top stats */}
             <div className="grid-4 mb-8" style={{ marginBottom: 32 }}>
-                <StatCard icon="📁" value={stats?.total_applications ?? 0} label="Total Applications" accentColor="var(--primary)" />
-                <StatCard icon="🎉" value={stats?.total_offers ?? 0} label="Total Offers" accentColor="var(--success)" />
-                <StatCard icon="❌" value={stats?.total_rejections ?? 0} label="Total Rejections" accentColor="var(--danger)" />
-                <StatCard icon="📊" value={`${stats?.success_rate ?? 0}%`} label="Success Rate" accentColor="var(--secondary)" />
+                <StatCard icon={Briefcase} value={stats?.total_applications ?? 0} label="Total Applications" accentColor="#0066cc" />
+                <StatCard icon={TrendingUp} value={stats?.total_offers ?? 0} label="Total Offers" accentColor="#059669" />
+                <StatCard icon={XCircle} value={stats?.total_rejections ?? 0} label="Total Rejections" accentColor="#dc2626" />
+                <StatCard icon={Clock} value={`${stats?.success_rate ?? 0}%`} label="Success Rate" accentColor="#0ea5e9" />
             </div>
 
             <div className="grid-2 mb-8" style={{ marginBottom: 32 }}>
                 {/* Outcome distribution pie */}
                 <div className="chart-card">
-                    <h3>🥧 Outcome Distribution</h3>
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 20 }}>Outcome Distribution</h3>
                     {pieData.length === 0 ? (
                         <div className="empty-state" style={{ padding: '24px' }}>
                             <p>No data yet</p>
@@ -71,17 +72,17 @@ function AnalyticsPage() {
                                     paddingAngle={4}
                                     dataKey="value"
                                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                                    labelLine={{ stroke: 'rgba(99,102,241,0.4)' }}
+                                    labelLine={{ stroke: '#e2e8f0' }}
                                 >
                                     {pieData.map((_, i) => (
                                         <Cell key={i} fill={OUTCOME_COLORS[i % OUTCOME_COLORS.length]} />
                                     ))}
                                 </Pie>
                                 <Tooltip
-                                    contentStyle={{ background: '#1e1e35', border: '1px solid rgba(99,102,241,0.3)', borderRadius: 10 }}
-                                    itemStyle={{ color: '#f1f5f9' }}
+                                    contentStyle={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 8 }}
+                                    itemStyle={{ color: '#0f172a' }}
                                 />
-                                <Legend wrapperStyle={{ color: '#94a3b8', fontSize: '0.8125rem' }} />
+                                <Legend wrapperStyle={{ color: '#64748b', fontSize: '0.8125rem' }} />
                             </PieChart>
                         </ResponsiveContainer>
                     )}
@@ -89,7 +90,7 @@ function AnalyticsPage() {
 
                 {/* Key metrics */}
                 <div className="card">
-                    <div className="section-title">📐 Key Metrics</div>
+                    <div className="section-title" style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 20 }}>Key Metrics</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                         {[
                             {
@@ -122,7 +123,7 @@ function AnalyticsPage() {
                                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>{m.label}</span>
                                     <strong style={{ fontSize: '1rem' }}>{m.value}</strong>
                                 </div>
-                                <div style={{ height: 6, borderRadius: 9999, background: 'var(--bg-elevated)', overflow: 'hidden' }}>
+                                <div style={{ height: 6, borderRadius: 9999, background: '#e2e8f0', overflow: 'hidden' }}>
                                     <div style={{ height: '100%', width: `${Math.min(m.bar, 100)}%`, background: m.color, borderRadius: 9999, transition: 'width 0.5s ease' }} />
                                 </div>
                             </div>
@@ -133,7 +134,7 @@ function AnalyticsPage() {
 
             {/* Area chart */}
             <div className="chart-card mb-8" style={{ marginBottom: 32 }}>
-                <h3>📈 Application Trend (Last 12 months)</h3>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 20 }}>Application Trend</h3>
                 {areaData.length === 0 ? (
                     <div className="empty-state" style={{ padding: '24px' }}>
                         <p>No data yet — start adding applications!</p>
@@ -143,25 +144,25 @@ function AnalyticsPage() {
                         <AreaChart data={areaData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
                             <defs>
                                 <linearGradient id="colorApplied" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                                    <stop offset="5%" stopColor="#0066cc" stopOpacity={0.2} />
+                                    <stop offset="95%" stopColor="#0066cc" stopOpacity={0} />
                                 </linearGradient>
                                 <linearGradient id="colorOffers" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                                    <stop offset="5%" stopColor="#059669" stopOpacity={0.2} />
+                                    <stop offset="95%" stopColor="#059669" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(99,102,241,0.1)" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                             <XAxis dataKey="month" tick={{ fill: '#64748b', fontSize: 12 }} axisLine={{ stroke: 'transparent' }} />
                             <YAxis tick={{ fill: '#64748b', fontSize: 12 }} axisLine={{ stroke: 'transparent' }} allowDecimals={false} />
                             <Tooltip
-                                contentStyle={{ background: '#1e1e35', border: '1px solid rgba(99,102,241,0.3)', borderRadius: 10 }}
-                                itemStyle={{ color: '#f1f5f9' }}
+                                contentStyle={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: 8 }}
+                                itemStyle={{ color: '#0f172a' }}
                             />
-                            <Legend wrapperStyle={{ color: '#94a3b8', fontSize: '0.8125rem' }} />
-                            <Area type="monotone" dataKey="Applied" stroke="#6366f1" fill="url(#colorApplied)" strokeWidth={2} dot={false} />
-                            <Area type="monotone" dataKey="Offers" stroke="#10b981" fill="url(#colorOffers)" strokeWidth={2} dot={false} />
-                            <Area type="monotone" dataKey="Rejected" stroke="#ef4444" fill="transparent" strokeWidth={2} strokeDasharray="4 2" dot={false} />
+                            <Legend wrapperStyle={{ color: '#64748b', fontSize: '0.8125rem' }} />
+                            <Area type="monotone" dataKey="Applied" stroke="#0066cc" fill="url(#colorApplied)" strokeWidth={2} dot={false} />
+                            <Area type="monotone" dataKey="Offers" stroke="#059669" fill="url(#colorOffers)" strokeWidth={2} dot={false} />
+                            <Area type="monotone" dataKey="Rejected" stroke="#dc2626" fill="transparent" strokeWidth={2} strokeDasharray="4 2" dot={false} />
                         </AreaChart>
                     </ResponsiveContainer>
                 )}
@@ -170,12 +171,12 @@ function AnalyticsPage() {
             {/* Monthly table */}
             {areaData.length > 0 && (
                 <div className="chart-card">
-                    <h3>📋 Monthly Breakdown</h3>
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 20 }}>Monthly Breakdown</h3>
                     <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 8 }}>
                         <thead>
-                            <tr style={{ borderBottom: '1px solid var(--border)' }}>
+                            <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                                 {['Month', 'Applied', 'Offers', 'Rejected', 'Success Rate'].map(h => (
-                                    <th key={h} style={{ padding: '8px 12px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.8125rem', fontWeight: 600 }}>
+                                    <th key={h} style={{ padding: '8px 12px', textAlign: 'left', color: '#64748b', fontSize: '0.8125rem', fontWeight: 600 }}>
                                         {h}
                                     </th>
                                 ))}
@@ -183,12 +184,12 @@ function AnalyticsPage() {
                         </thead>
                         <tbody>
                             {areaData.map((row) => (
-                                <tr key={row.month} style={{ borderBottom: '1px solid rgba(99,102,241,0.08)' }}>
+                                <tr key={row.month} style={{ borderBottom: '1px solid #f1f5f9' }}>
                                     <td style={{ padding: '10px 12px', fontWeight: 500 }}>{row.month}</td>
                                     <td style={{ padding: '10px 12px' }}>{row.Applied}</td>
-                                    <td style={{ padding: '10px 12px', color: 'var(--success)' }}>{row.Offers}</td>
-                                    <td style={{ padding: '10px 12px', color: 'var(--danger)' }}>{row.Rejected}</td>
-                                    <td style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>
+                                    <td style={{ padding: '10px 12px', color: '#059669' }}>{row.Offers}</td>
+                                    <td style={{ padding: '10px 12px', color: '#dc2626' }}>{row.Rejected}</td>
+                                    <td style={{ padding: '10px 12px', color: '#475569' }}>
                                         {row.Applied > 0 ? `${Math.round((row.Offers / row.Applied) * 100)}%` : '—'}
                                     </td>
                                 </tr>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { Briefcase, Plus } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { applicationsAPI } from '../services/api.js'
 import ApplicationCard from '../components/ApplicationCard.jsx'
@@ -51,11 +52,12 @@ function ApplicationsListPage() {
         <div>
             <div className="page-header flex justify-between items-center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
-                    <h1>📁 Applications</h1>
+                    <h1>Applications</h1>
                     <p>{pagination.total} total application{pagination.total !== 1 ? 's' : ''}</p>
                 </div>
                 <Link to="/applications/new" className="btn btn-primary">
-                    + New Application
+                    <Plus size={18} />
+                    New Application
                 </Link>
             </div>
 

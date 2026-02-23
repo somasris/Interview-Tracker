@@ -7,7 +7,7 @@ function StatCard({ icon: Icon, value, label, accentColor = 'var(--primary)' }) 
             }}
         >
             <div className="stat-icon">
-                {typeof Icon === 'function' ? <Icon size={32} /> : Icon}
+                {Icon ? <Icon size={32} strokeWidth={1.5} /> : null}
             </div>
             <div className="stat-value">{value ?? '—'}</div>
             <div className="stat-label">{label}</div>
