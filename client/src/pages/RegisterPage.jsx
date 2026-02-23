@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Briefcase } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { authAPI } from '../services/api.js'
 import { setToken, setUser } from '../utils/auth.js'
@@ -25,7 +26,7 @@ function RegisterPage() {
             const { token, user } = res.data.data
             setToken(token)
             setUser(user)
-            toast.success('Account created! Welcome 🎉')
+            toast.success('Account created successfully!')
             navigate('/dashboard')
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed. Please try again.')
@@ -38,12 +39,15 @@ function RegisterPage() {
         <div className="auth-page">
             <div className="auth-card">
                 <div className="auth-logo">
-                    <h1>🎯 Interview Tracker</h1>
-                    <p>Start tracking your job applications today</p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+                        <Briefcase size={28} color="#0066cc" />
+                    </div>
+                    <h1>Career Tracker</h1>
+                    <p>Organize your job search easily</p>
                 </div>
 
-                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 24 }}>
-                    Create your free account
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: 24, color: 'var(--text-primary)' }}>
+                    Create your account
                 </h2>
 
                 {error && <div className="alert alert-error">{error}</div>}
@@ -63,7 +67,7 @@ function RegisterPage() {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Email</label>
+                        <label className="form-label">Email Address</label>
                         <input
                             className="form-control"
                             type="email"
@@ -94,13 +98,13 @@ function RegisterPage() {
                         type="submit"
                         className="btn btn-primary btn-lg"
                         disabled={loading}
-                        style={{ width: '100%', marginTop: 8 }}
+                        style={{ width: '100%', marginTop: 16 }}
                     >
                         {loading ? 'Creating account...' : 'Create Account'}
                     </button>
                 </form>
 
-                <div className="auth-footer">
+                <div className="auth-footer" style={{ marginTop: 24, textAlign: 'center' }}>
                     Already have an account?{' '}
                     <Link to="/login">Sign in</Link>
                 </div>

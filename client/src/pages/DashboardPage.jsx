@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Briefcase, TrendingUp, XCircle, Clock, Plus } from 'lucide-react'
 import { dashboardAPI } from '../services/api.js'
 import { getUser } from '../utils/auth.js'
 import StatCard from '../components/StatCard.jsx'
@@ -28,48 +29,48 @@ function DashboardPage() {
     return (
         <div>
             <div className="page-header">
-                <h1>👋 Welcome back, {user?.name?.split(' ')[0] || 'there'}!</h1>
+                <h1>Welcome back, {user?.name?.split(' ')[0] || 'there'}!</h1>
                 <p>Here's your job search overview</p>
             </div>
 
             {/* Stats Grid */}
             <div className="grid-4 mb-8">
                 <StatCard
-                    icon="📁"
+                    icon={Briefcase}
                     value={stats?.total_applications ?? 0}
                     label="Total Applications"
-                    accentColor="var(--primary)"
+                    accentColor="#0066cc"
                 />
                 <StatCard
-                    icon="🎉"
+                    icon={TrendingUp}
                     value={stats?.total_offers ?? 0}
                     label="Offers Received"
-                    accentColor="var(--success)"
+                    accentColor="#059669"
                 />
                 <StatCard
-                    icon="❌"
+                    icon={XCircle}
                     value={stats?.total_rejections ?? 0}
                     label="Rejections"
-                    accentColor="var(--danger)"
+                    accentColor="#dc2626"
                 />
                 <StatCard
-                    icon="📊"
+                    icon={Clock}
                     value={`${stats?.success_rate ?? 0}%`}
                     label="Success Rate"
-                    accentColor="var(--secondary)"
+                    accentColor="#0ea5e9"
                 />
             </div>
 
             <div className="grid-2 mb-8">
                 {/* Monthly Chart */}
                 <div className="chart-card">
-                    <h3>📈 Monthly Applications (Last 12 months)</h3>
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 20 }}>Monthly Applications</h3>
                     <MonthlyChart data={stats?.monthly ?? []} />
                 </div>
 
                 {/* Pipeline stats */}
                 <div className="card">
-                    <div className="section-title">🔵 Pipeline Summary</div>
+                    <div className="section-title" style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 20 }}>Pipeline Summary</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                         <div className="flex justify-between items-center">
                             <span style={{ color: 'var(--text-secondary)' }}>Active Applications</span>
@@ -95,7 +96,7 @@ function DashboardPage() {
             {stats?.recent_applications?.length > 0 && (
                 <div className="card">
                     <div className="flex justify-between items-center mb-4" style={{ marginBottom: 20 }}>
-                        <div className="section-title" style={{ margin: 0 }}>🕐 Recent Applications</div>
+                        <div className="section-title" style={{ margin: 0, fontSize: '1.125rem', fontWeight: 600 }}>Recent Applications</div>
                         <Link to="/applications" className="btn btn-secondary btn-sm">View All</Link>
                     </div>
 

@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { getUser, logout } from '../utils/auth.js'
+import { BarChart3, FileText, TrendingUp, LogOut, Briefcase } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 const navItems = [
-    { to: '/dashboard', icon: '📊', label: 'Dashboard' },
-    { to: '/applications', icon: '📁', label: 'Applications' },
-    { to: '/analytics', icon: '📈', label: 'Analytics' },
+    { to: '/dashboard', icon: BarChart3, label: 'Dashboard' },
+    { to: '/applications', icon: Briefcase, label: 'Applications' },
+    { to: '/analytics', icon: TrendingUp, label: 'Analytics' },
 ]
 
 function Navbar() {
@@ -24,11 +25,12 @@ function Navbar() {
     return (
         <aside className="sidebar">
             <div className="sidebar-logo">
-                <span>🎯 Interview Tracker</span>
+                <Briefcase size={24} style={{ marginRight: 8 }} />
+                <span>Career Tracker</span>
             </div>
 
             <nav className="sidebar-nav">
-                {navItems.map(({ to, icon, label }) => (
+                {navItems.map(({ to, icon: Icon, label }) => (
                     <NavLink
                         key={to}
                         to={to}
@@ -36,7 +38,7 @@ function Navbar() {
                             `sidebar-link${isActive ? ' active' : ''}`
                         }
                     >
-                        <span className="icon">{icon}</span>
+                        <Icon size={18} />
                         {label}
                     </NavLink>
                 ))}
@@ -51,7 +53,8 @@ function Navbar() {
                     </div>
                 </div>
                 <button className="logout-btn" onClick={handleLogout}>
-                    🚪 Sign Out
+                    <LogOut size={16} />
+                    Sign Out
                 </button>
             </div>
         </aside>
